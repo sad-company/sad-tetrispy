@@ -22,6 +22,8 @@ class Engine:
     def __init_screen(self) -> None:
         # NOTE: do not wait for input when calling getch
         self.__stdscr.nodelay(1)
+        # NOTE: disable cursor
+        curses.curs_set(False)
 
     def run(self) -> None:
         self.__init_screen()
