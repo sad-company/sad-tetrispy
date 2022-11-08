@@ -1,0 +1,1 @@
+CellsType = list[list[bool]]
