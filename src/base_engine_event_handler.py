@@ -6,7 +6,7 @@ from game_event import GameEvent
 
 
 class BaseEngineEventHandler(ABC):
-    def __init__(self, stdscr, board: Board):
+    def __init__(self, stdscr, board: Board) -> None:
         self._stdscr = stdscr
         self._board = board
 
