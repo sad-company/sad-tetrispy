@@ -1,7 +1,4 @@
 from dataclasses import dataclass
-from typing import Tuple
-
-PointType = Tuple[int, int]
 
 
 @dataclass
