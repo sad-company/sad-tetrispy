@@ -7,8 +7,6 @@ from point import Point
 
 
 def main(stdscr) -> None:
-    print("I am a cool game!")
-
     board = Board(20, 10)
     # TODO(DP): --> remove after test
     prefilled_points = [Point(board.height - 1, i) for i in range(5)]
