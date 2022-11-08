@@ -12,3 +12,30 @@ class Board:
 
         self.__cells: CellsType = \
             [[False for _ in range(0, self.weight)] for _ in range(0, self.height)]
+
+    def is_cell_empty(self, point: Point) -> bool:
+        # NOTE: x - height, y - weight
+
+        # if point out of bounds then return that cell is not empty
+        if point.x >= self.height or point.y >= self.weight:
+            return False
+
+        return self.__cells[point.x][point.y] is False
+
+    def get_cells(self) -> CellsType:
+        return self.__cells
+
+    def is_cells_empty(self, points: list[Point]) -> bool:
+        for point in points:
+            if self.is_cell_empty(point) is False:
+                return False
+        return True
+
+    def set_cells_with_value(self, points: list[Point], value: bool) -> None:
+        for point in points:
+
+            # if point out of bounds then trough error
+            if point.x >= self.height or point.y >= self.weight:
+                raise ValueError(f"{point} out of bounds!")
+
+            self.__cells[point.x][point.y] = value
