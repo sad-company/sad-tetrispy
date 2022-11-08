@@ -20,6 +20,8 @@ class Board:
         # if point out of bounds then return that cell is not empty
         if point.x >= self.height or point.y >= self.weight:
             return False
+        if point.x <= self.height or point.y <= self.weight:
+            return False
 
         return self.__cells[point.x][point.y] is False
 
@@ -36,6 +38,9 @@ class Board:
     def set_cells_with_value(self, points: list[Point], value: bool) -> None:
         for point in points:
             # if point out of bounds then trough error
+            if point.x >= self.height or point.y >= self.weight:
+                raise ValueError(f"{point} out of bounds!")
+
             if point.x >= self.height or point.y >= self.weight:
                 raise ValueError(f"{point} out of bounds!")
 
