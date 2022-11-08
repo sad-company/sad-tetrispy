@@ -130,3 +130,5 @@ dmypy.json
 
 # PyCharm stuff
 .idea/
+
+./src/sandbox.py
