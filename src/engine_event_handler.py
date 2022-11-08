@@ -15,7 +15,7 @@ emulated_figure_cells = [
 
 
 class EngineEventHandler(BaseEngineEventHandler):
-    def __init__(self, stdscr, board: Board):
+    def __init__(self, stdscr, board: Board) -> None:
         super().__init__(stdscr, board)
 
         self.__renderer = Renderer(stdscr)
