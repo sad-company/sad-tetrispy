@@ -1,4 +1,5 @@
 from cells_type import CellsType
+from point import Point
 
 
 class Board:
@@ -29,11 +30,11 @@ class Board:
         for point in points:
             if self.is_cell_empty(point) is False:
                 return False
+
         return True
 
     def set_cells_with_value(self, points: list[Point], value: bool) -> None:
         for point in points:
-
             # if point out of bounds then trough error
             if point.x >= self.height or point.y >= self.weight:
                 raise ValueError(f"{point} out of bounds!")
