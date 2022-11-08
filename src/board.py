@@ -1,4 +1,4 @@
-from src.cells import CellsType
+from cells_type import CellsType
 
 
 class Board:
