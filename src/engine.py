@@ -27,6 +27,7 @@ class Engine:
 
     def run(self) -> None:
         self.__init_screen()
+        self.__event_handler.handle(EngineEvent.START)
 
         last_tick_timestamp = time()
 
