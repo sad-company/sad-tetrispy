@@ -1,5 +1,5 @@
 from board import Board
-from point import Point
+from point import Point, Points
 
 
 class BoardConverter:
@@ -24,7 +24,7 @@ class BoardConverter:
         height = len(lines)
         weight = len(lines[0])
         board = Board(height, weight)
-        points: list[Point] = []
+        points: Points = []
 
         for x, line in enumerate(lines):
             for y, cell in enumerate(line):

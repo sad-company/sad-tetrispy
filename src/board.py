@@ -1,6 +1,6 @@
 from cells_type import CellsType
+from point import Point, Points
 from figure import Figure
-from point import Point
 
 
 class Board:
@@ -27,14 +27,14 @@ class Board:
     def get_cells(self) -> CellsType:
         return self.__cells
 
-    def is_cells_empty(self, points: list[Point]) -> bool:
+    def is_cells_empty(self, points: Points) -> bool:
         for point in points:
             if not self.is_cell_empty(point):
                 return False
 
         return True
 
-    def set_cells_with_value(self, points: list[Point], value: bool) -> None:
+    def set_cells_with_value(self, points: Points, value: bool) -> None:
         for point in points:
             if not point.is_in_board(self.height, self.weight):
                 raise ValueError(f"{point} out of bounds!")
@@ -47,5 +47,5 @@ class Board:
 
             if not self.is_cell_empty(point_below):
                 return True
-            
+
         return False
