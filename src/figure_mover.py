@@ -24,5 +24,14 @@ class FigureMover:
         return new_points
 
     @staticmethod
+    def move_down(figure: Figure) -> NewPoints:
+        new_points: NewPoints = []
+
+        for point in figure.points:
+            new_points.append(Point(point.x + 1, point.y))
+
+        return new_points
+
+    @staticmethod
     def rotate(figure: Figure) -> NewPoints:
         raise NotImplementedError("Please wait a minute (or day :))")
