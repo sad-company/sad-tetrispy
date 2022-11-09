@@ -1,3 +1,5 @@
+import copy
+
 from figure import Figure
 from figure_kind import FigureKind
 from point import Point
@@ -16,5 +18,5 @@ class FigureFactory:
 
     @staticmethod
     def create(kind: FigureKind) -> Figure:
-        figure_points = FigureFactory.kind_figure_points_mapping[kind]
+        figure_points = copy.deepcopy(FigureFactory.kind_figure_points_mapping[kind])
         return Figure(kind, Point(0, 0), figure_points)
