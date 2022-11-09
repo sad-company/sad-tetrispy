@@ -1,10 +1,13 @@
 import curses.textpad
 
 from board import Board
+from score_holder import ScoreHolder
 
 
 class Renderer:
     __BORDER_WEIGHT: int = 1
+    __STATISTIC_TOP_PADDING: int = 1
+    __STATISTIC_BLOCKS_PADDING: int = 2
     __CELL_CHARACTER: dict[bool, str] = {
         True: '▨',
         False: ' ',
@@ -28,6 +31,9 @@ class Renderer:
                             y + self.__BORDER_WEIGHT,
                             self.__CELL_CHARACTER[is_fill])
 
+    def __draw_string(self, x: int, y: int, value: str) -> None:
+        self.__stdscr.addstr(x, y, value)
+
     def __draw_board_cells(self, board: Board) -> None:
         board_cells = board.get_cells()
 
@@ -42,9 +48,25 @@ class Renderer:
         for point in figure_points:
             self.__draw_cell(point.x, point.y, is_fill=True)
 
+    def __draw_statistic(self, board: Board, score_holder: ScoreHolder) -> None:
+        x = self.__STATISTIC_TOP_PADDING
+        y = board.weight + self.__BORDER_WEIGHT + 1
+
+        self.__draw_string(x, y, 'Scores:')
+        x += 1
+
+        self.__draw_string(x, y, str(score_holder.get_scores()))
+        x += self.__STATISTIC_BLOCKS_PADDING
+
+        self.__draw_string(x, y, 'Lines:')
+        x += 1
+
+        self.__draw_string(x, y, str(score_holder.get_burned_line_count()))
+
     # TODO(DP): use Figure class instead of figure_points
-    def render(self, board: Board, figure_points: list) -> None:
+    def render(self, board: Board, figure_points: list, score_holder: ScoreHolder) -> None:
         self.__before_render()
         self.__draw_board_border(board)
+        self.__draw_statistic(board, score_holder)
         self.__draw_board_cells(board)
         self.__draw_figure(figure_points)

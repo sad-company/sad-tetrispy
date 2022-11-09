@@ -20,7 +20,7 @@ class ScoreHolder:
         self.__scores += score_increment
         self.__burned_line_count += burned_line_count
 
-    def get_score(self) -> int:
+    def get_scores(self) -> int:
         return self.__scores
 
     def get_burned_line_count(self) -> int:

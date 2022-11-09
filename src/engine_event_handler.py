@@ -32,6 +32,8 @@ class EngineEventHandler(BaseEngineEventHandler):
             for cell in emulated_figure_cells:
                 cell.x += 1
         # TODO(DP): <-- remove after figure generation integration
-        self.__renderer.render(self._board, emulated_figure_cells)
+        self.__renderer.render(self._board,
+                               emulated_figure_cells,
+                               self.__score_holder)
 
         return GameEvent.CONTINUE
