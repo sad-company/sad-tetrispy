@@ -4,6 +4,7 @@ from engine_event import EngineEvent
 from game_event import GameEvent
 from point import Point
 from renderer import Renderer
+from score_holder import ScoreHolder
 
 # TODO(DP): remove after figure generation integration
 emulated_figure_cells = [
@@ -19,9 +20,12 @@ class EngineEventHandler(BaseEngineEventHandler):
         super().__init__(stdscr, board)
 
         self.__renderer = Renderer(stdscr)
+        self.__score_holder = ScoreHolder()
 
     def handle(self, event: EngineEvent) -> GameEvent:
         # TODO(DP): add "figure touches bottom" check
+
+        # TODO(DP): use self.__score_holder
 
         # TODO(DP): --> remove after figure generation integration
         if event == EngineEvent.TIME_TICK:
