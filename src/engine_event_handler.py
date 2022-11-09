@@ -23,6 +23,9 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__score_holder = ScoreHolder()
 
     def handle(self, event: EngineEvent) -> GameEvent:
+        if not self._board.is_cells_empty(emulated_figure_cells):
+            return GameEvent.END
+
         # TODO(DP): add "figure touches bottom" check
 
         # TODO(DP): use self.__score_holder
