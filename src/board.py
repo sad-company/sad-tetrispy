@@ -47,3 +47,5 @@ class Board:
 
             if not self.is_cell_empty(point_below):
                 return True
+            
+        return False

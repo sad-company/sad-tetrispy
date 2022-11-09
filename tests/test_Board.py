@@ -7,15 +7,25 @@ from point import Point
 
 
 class BoardTestCase(unittest.TestCase):
-
     def test_when_figure_is_not_on_bottom(self):
         line_figure = FigureFactory.create(FigureKind.LINE)
 
         board_with_empty_cells = Board(4, 4)
+        # NOTE: x - figure cell; o - filled cell
+        # xxxx
+        # ----
+        # ----
+        # ----
         board_with_some_filled_cells = Board(3, 4)
         board_with_some_filled_cells.set_cells_with_value([Point(2, 0), Point(2, 1)], True)
+        # xxxx
+        # ----
+        # oo--
         another_board_with_some_filled_cells = Board(3, 5)
         another_board_with_some_filled_cells.set_cells_with_value([Point(1, 4)], True)
+        # xxxx-
+        # ----o
+        # -----
 
         sub_tests_data = {
             'All cells are empty': (line_figure, board_with_empty_cells),
@@ -31,10 +41,18 @@ class BoardTestCase(unittest.TestCase):
         snake_figure = FigureFactory.create(FigureKind.SNAKE_LEFT)
 
         board_with_empty_cells = Board(2, 4)
+        # xx--
+        # -xx-
         board_with_some_filled_cells = Board(3, 4)
         board_with_some_filled_cells.set_cells_with_value([Point(2, 1), Point(2, 2)], True)
+        # xx--
+        # -xx-
+        # -oo-
         another_board_with_some_filled_cells = Board(3, 4)
-        another_board_with_some_filled_cells.set_cells_with_value([Point(2, 1)], True)
+        another_board_with_some_filled_cells.set_cells_with_value([Point(1, 1)], True)
+        # xx--
+        # oxx-
+        # ----
 
         sub_tests_data = {
             'All cells are empty, figure on bottom': (snake_figure, board_with_empty_cells),
