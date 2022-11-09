@@ -15,5 +15,5 @@ class FigureFactory:
     }
 
     @staticmethod
-    def create(cls, kind: FigureKind) -> Figure:
-        return Figure(kind, Point(0, 0), cls.kind_figure_points_mapping[kind])
+    def create(kind: FigureKind) -> Figure:
+        return Figure(kind, Point(0, 0), FigureFactory.kind_figure_points_mapping[kind])
