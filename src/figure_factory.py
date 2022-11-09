@@ -19,4 +19,5 @@ class FigureFactory:
     @staticmethod
     def create(kind: FigureKind) -> Figure:
         figure_points = copy.deepcopy(FigureFactory.kind_figure_points_mapping[kind])
+
         return Figure(kind, Point(0, 0), figure_points)
