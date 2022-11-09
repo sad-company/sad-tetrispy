@@ -26,11 +26,11 @@ class FigureMover:
             {
                 FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
                 FigureKind.LINE: [Point(0, 0), Point(1, 0), Point(2, 0), Point(3, 0)],
-                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
-                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
-                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
-                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
-                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 0), Point(1, 0), Point(1, 1), Point(2, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 1), Point(1, 0), Point(1, 1), Point(2, 0)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0)],
+                FigureKind.CORNER_LEFT: [Point(1, 0), Point(1, 1), Point(1, 2), Point(0, 2)],
+                FigureKind.T_LETTER: [Point(0, 1), Point(1, 0), Point(1, 1), Point(2, 1)],
             },
         RotationKind.ROTATION_180:
             {
@@ -38,19 +38,19 @@ class FigureMover:
                 FigureKind.LINE: [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)],
                 FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
                 FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
-                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
-                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
-                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(2, 1)],
+                FigureKind.CORNER_LEFT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
+                FigureKind.T_LETTER: [Point(0, 1), Point(1, 0), Point(1, 1), Point(1, 2)],
             },
         RotationKind.ROTATION_270:
             {
                 FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
                 FigureKind.LINE: [Point(0, 0), Point(1, 0), Point(2, 0), Point(3, 0)],
-                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
-                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
-                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
-                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
-                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 0), Point(1, 0), Point(1, 1), Point(2, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 1), Point(1, 0), Point(1, 1), Point(2, 0)],
+                FigureKind.CORNER_RIGHT: [Point(1, 0), Point(1, 1), Point(1, 2), Point(0, 2)],
+                FigureKind.CORNER_LEFT: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 0)],
+                FigureKind.T_LETTER: [Point(0, 0), Point(1, 0), Point(1, 1), Point(2, 0)],
             }
     }
 
