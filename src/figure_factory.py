@@ -3,6 +3,7 @@ import copy
 from figure import Figure
 from figure_kind import FigureKind
 from point import Point, Points
+from rotation_kind import RotationKind
 
 
 class FigureFactory:
@@ -20,4 +21,4 @@ class FigureFactory:
     def create(kind: FigureKind) -> Figure:
         figure_points = copy.deepcopy(FigureFactory.__kind_figure_points_mapping[kind])
 
-        return Figure(kind, Point(0, 0), figure_points)
+        return Figure(kind, Point(0, 0), figure_points, RotationKind.ROTATION_0)
