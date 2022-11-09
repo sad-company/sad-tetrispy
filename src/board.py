@@ -1,4 +1,5 @@
 from cells_type import CellsType
+from figure import Figure
 from point import Point
 
 
@@ -39,3 +40,10 @@ class Board:
                 raise ValueError(f"{point} out of bounds!")
 
             self.__cells[point.x][point.y] = value
+
+    def is_on_bottom(self, figure: Figure) -> bool:
+        for point in figure.points:
+            point_below = Point(point.x + 1, point.y)
+
+            if not self.is_cell_empty(point_below):
+                return True
