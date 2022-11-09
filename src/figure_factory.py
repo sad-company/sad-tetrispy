@@ -2,25 +2,16 @@ import copy
 
 from figure import Figure
 from figure_kind import FigureKind
-from point import Point, Points
+from figure_mover import FigureMover
+from point import Point
 from rotation_kind import RotationKind
 
 
 class FigureFactory:
-    # TODO(AB): Duplicated at FigureMover
-    
-    __kind_figure_points_mapping: dict[FigureKind, Points] = {
-        FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
-        FigureKind.LINE: [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)],
-        FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
-        FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
-        FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
-        FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
-        FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
-    }
-
     @staticmethod
     def create(kind: FigureKind) -> Figure:
-        figure_points = copy.deepcopy(FigureFactory.__kind_figure_points_mapping[kind])
+        start_rotation = RotationKind.ROTATION_0
+        figure_points = copy.deepcopy(
+            FigureMover.rotation_figure_points_mapping[start_rotation][kind])
 
-        return Figure(kind, Point(0, 0), figure_points, RotationKind.ROTATION_0)
+        return Figure(kind, Point(0, 0), figure_points, start_rotation)
