@@ -7,7 +7,7 @@ from point import Point
 
 
 def main(stdscr) -> None:
-    board = Board(20, 10)
+    board = Board(height=20, weight=10)
     # TODO(DP): --> remove after test
     prefilled_points = [Point(board.height - 1, i) for i in range(5)]
 
