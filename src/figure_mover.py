@@ -1,5 +1,5 @@
 from figure import Figure
-from point import Points
+from point import Point, Points
 
 NewPoints = Points
 
@@ -7,11 +7,21 @@ NewPoints = Points
 class FigureMover:
     @staticmethod
     def move_right(figure: Figure) -> NewPoints:
-        raise NotImplementedError("Ooops")
+        new_points: NewPoints = []
+
+        for point in figure.points:
+            new_points.append(Point(point.x, point.y + 1))
+
+        return new_points
 
     @staticmethod
     def move_left(figure: Figure) -> NewPoints:
-        raise NotImplementedError("Too early")
+        new_points: NewPoints = []
+
+        for point in figure.points:
+            new_points.append(Point(point.x, point.y - 1))
+
+        return new_points
 
     @staticmethod
     def rotate(figure: Figure) -> NewPoints:
