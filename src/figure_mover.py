@@ -1,10 +1,66 @@
+from typing import Tuple
+
 from figure import Figure
+from figure_kind import FigureKind
 from point import Point, Points
+from rotation_kind import RotationKind
 
 NewPoints = Points
+NewRotation = RotationKind
+RotationResult = Tuple[NewPoints, NewRotation]
 
 
 class FigureMover:
+    __rotation_figure_points_mapping: dict[RotationKind, dict[FigureKind, Points]] = {
+        RotationKind.ROTATION_0:
+            {
+                FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
+                FigureKind.LINE: [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
+                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
+                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+            },
+        RotationKind.ROTATION_90:
+            {
+                FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
+                FigureKind.LINE: [Point(0, 0), Point(1, 0), Point(2, 0), Point(3, 0)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
+                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
+                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+            },
+        RotationKind.ROTATION_180:
+            {
+                FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
+                FigureKind.LINE: [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
+                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
+                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+            },
+        RotationKind.ROTATION_270:
+            {
+                FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
+                FigureKind.LINE: [Point(0, 0), Point(1, 0), Point(2, 0), Point(3, 0)],
+                FigureKind.SNAKE_RIGHT: [Point(0, 1), Point(0, 2), Point(1, 0), Point(1, 1)],
+                FigureKind.SNAKE_LEFT: [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)],
+                FigureKind.CORNER_RIGHT: [Point(0, 0), Point(1, 0), Point(2, 0), Point(2, 1)],
+                FigureKind.CORNER_LEFT: [Point(0, 1), Point(1, 1), Point(2, 0), Point(2, 1)],
+                FigureKind.T_LETTER: [Point(0, 0), Point(0, 1), Point(0, 2), Point(1, 1)],
+            }
+    }
+
+    @staticmethod
+    def rotate(figure: Figure) -> RotationResult:
+        new_rotation = figure.rotation.get_next()
+        new_points = FigureMover.__rotation_figure_points_mapping[new_rotation][figure.kind]
+
+        return new_points, new_rotation
+
     @staticmethod
     def move_right(figure: Figure) -> NewPoints:
         new_points: NewPoints = []
@@ -31,7 +87,3 @@ class FigureMover:
             new_points.append(Point(point.x + 1, point.y))
 
         return new_points
-
-    @staticmethod
-    def rotate(figure: Figure) -> NewPoints:
-        raise NotImplementedError("Please wait a minute (or day :))")

@@ -7,6 +7,8 @@ from rotation_kind import RotationKind
 
 
 class FigureFactory:
+    # TODO(AB): Duplicated at FigureMover
+    
     __kind_figure_points_mapping: dict[FigureKind, Points] = {
         FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
         FigureKind.LINE: [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)],
