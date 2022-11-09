@@ -34,6 +34,14 @@ class EngineEventHandler(BaseEngineEventHandler):
         if event == EngineEvent.TIME_TICK:
             for cell in emulated_figure_cells:
                 cell.x += 1
+
+        if event == EngineEvent.MOVE_RIGHT:
+            for cell in emulated_figure_cells:
+                cell.y += 1
+
+        if event == EngineEvent.MOVE_LEFT:
+            for cell in emulated_figure_cells:
+                cell.y -= 1
         # TODO(DP): <-- remove after figure generation integration
         self.__renderer.render(self._board,
                                emulated_figure_cells,
