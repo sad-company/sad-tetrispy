@@ -18,7 +18,7 @@ class Board:
         # NOTE: x - height, y - weight
 
         # if point out of bounds then return that cell is not empty
-        if point.x >= self.height or point.y >= self.weight:
+        if not point.is_in_board(self.height, self.weight):
             return False
 
         return self.__cells[point.x][point.y] is False
@@ -28,15 +28,14 @@ class Board:
 
     def is_cells_empty(self, points: list[Point]) -> bool:
         for point in points:
-            if self.is_cell_empty(point) is False:
+            if not self.is_cell_empty(point):
                 return False
 
         return True
 
     def set_cells_with_value(self, points: list[Point], value: bool) -> None:
         for point in points:
-            # if point out of bounds then trough error
-            if point.x >= self.height or point.y >= self.weight:
+            if not point.is_in_board(self.height, self.weight):
                 raise ValueError(f"{point} out of bounds!")
 
             self.__cells[point.x][point.y] = value
