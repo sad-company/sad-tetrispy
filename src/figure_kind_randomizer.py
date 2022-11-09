@@ -1,7 +1,11 @@
+import random
+
 from figure_kind import FigureKind
 
 
 class FigureKindRandomizer:
-    def get_random(self) -> FigureKind:
-        # TODO(AB): Task for Serg
-        pass
+    def __init__(self) -> None:
+        self.__kinds = list(FigureKind)
+
+    def random(self) -> FigureKind:
+        return random.choice(self.__kinds)
