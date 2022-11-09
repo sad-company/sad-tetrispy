@@ -4,8 +4,8 @@ from figure_kind import FigureKind
 
 
 class FigureKindRandomizer:
-    def __init__(self) -> None:
-        self.__kinds = list(FigureKind)
+    __kinds = list(FigureKind)
 
-    def random(self) -> FigureKind:
-        return random.choice(self.__kinds)
+    @staticmethod
+    def get_random() -> FigureKind:
+        return random.choice(FigureKindRandomizer.__kinds)
