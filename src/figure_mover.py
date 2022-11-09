@@ -1,3 +1,4 @@
+import copy
 from typing import Tuple
 
 from figure import Figure
@@ -11,7 +12,7 @@ RotationResult = Tuple[NewPoints, NewRotation]
 
 
 class FigureMover:
-    __rotation_figure_points_mapping: dict[RotationKind, dict[FigureKind, Points]] = {
+    rotation_figure_points_mapping: dict[RotationKind, dict[FigureKind, Points]] = {
         RotationKind.ROTATION_0:
             {
                 FigureKind.SQUARE: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
@@ -56,8 +57,10 @@ class FigureMover:
 
     @staticmethod
     def rotate(figure: Figure) -> RotationResult:
+        """Clockwise rotation of figure based on its type"""
         new_rotation = figure.rotation.get_next()
-        new_points = FigureMover.__rotation_figure_points_mapping[new_rotation][figure.kind]
+        new_points = copy.deepcopy(
+            FigureMover.rotation_figure_points_mapping[new_rotation][figure.kind])
 
         return new_points, new_rotation
 
