@@ -11,3 +11,6 @@ class Point:
         is_y_in_bounds = 0 <= self.y < weight
 
         return is_x_in_bounds and is_y_in_bounds
+
+
+Points = list[Point]
