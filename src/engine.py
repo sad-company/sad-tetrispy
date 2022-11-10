@@ -24,6 +24,7 @@ class Engine:
             curses.KEY_RIGHT: EngineEvent.MOVE_RIGHT,
             curses.KEY_DOWN: EngineEvent.TIME_TICK,
         }
+        self.__last_tick_timestamp = time()
 
     def __init_screen(self) -> None:
         # NOTE: do not wait for input when calling getch
@@ -31,21 +32,25 @@ class Engine:
         # NOTE: disable cursor
         curses.curs_set(False)
 
+    def __is_tick_time(self) -> bool:
+        current_timestamp = time()
+        time_delta = current_timestamp - self.__last_tick_timestamp
+
+        if time_delta < self.__tick_duration_in_sec:
+            return False
+
+        self.__last_tick_timestamp = current_timestamp
+
+        return True
+
     def run(self) -> None:
         self.__init_screen()
         self.__event_handler.handle(EngineEvent.START)
 
-        last_tick_timestamp = time()
-
         # TODO(DP): handle self.__event_handler.handle_engine_event() results
         # TODO(DP): handle GameEvent.END to stop
         while True:
-            current_timestamp = time()
-            time_delta = current_timestamp - last_tick_timestamp
-
-            if time_delta > self.__tick_duration_in_sec:
-                last_tick_timestamp = current_timestamp
-
+            if self.__is_tick_time():
                 self.__event_handler.handle(EngineEvent.TIME_TICK)
 
             pressed_key = self.__stdscr.getch()
