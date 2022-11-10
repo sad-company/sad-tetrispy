@@ -16,6 +16,10 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__current_figure = FigureFactory.create_random()
         self.__next_figure = FigureFactory.create_random()
 
+    def __use_next_figure(self) -> None:
+        self.__current_figure = self.__next_figure
+        self.__next_figure = FigureFactory.create_random()
+
     def handle(self, event: EngineEvent) -> GameEvent:
         current_figure_points = self.__current_figure.points
 
@@ -23,6 +27,8 @@ class EngineEventHandler(BaseEngineEventHandler):
             return GameEvent.END
 
         # TODO(DP): add "figure touches bottom" check
+
+        # TODO(DP): use __use_next_figure()
 
         # TODO(DP): use self.__score_holder
 
