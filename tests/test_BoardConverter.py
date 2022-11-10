@@ -14,7 +14,9 @@ class BoardConverterTestCase(unittest.TestCase):
         # --xx
         # xxxx
 
-        expected = '0 0 0 0\n0 0 1 1\n1 1 1 1\n'
+        expected = '0 0 0 0\n' \
+                   '0 0 1 1\n' \
+                   '1 1 1 1\n'
 
         self.assertEqual(expected, BoardConverter.to_string(board))
 
