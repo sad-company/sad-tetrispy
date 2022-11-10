@@ -69,8 +69,6 @@ class Engine:
         self.__init_screen()
         self.__event_handler.handle(EngineEvent.START)
 
-        # TODO(DP): handle self.__event_handler.handle_engine_event() results
-        # TODO(DP): handle GameEvent.END to stop
         while True:
             for engine_event in self.__get_engine_events():
                 game_event = self.__event_handler.handle(engine_event)
