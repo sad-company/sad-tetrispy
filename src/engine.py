@@ -43,6 +43,14 @@ class Engine:
 
         return True
 
+    def __try_get_engine_event_by_input_key(self) -> EngineEvent | None:
+        pressed_key = self.__stdscr.getch()
+
+        if pressed_key == NO_PRESSED_KEY:
+            return None
+
+        return self.__key_engine_event_mapping.get(pressed_key)
+
     def run(self) -> None:
         self.__init_screen()
         self.__event_handler.handle(EngineEvent.START)
@@ -53,12 +61,7 @@ class Engine:
             if self.__is_tick_time():
                 self.__event_handler.handle(EngineEvent.TIME_TICK)
 
-            pressed_key = self.__stdscr.getch()
-
-            if pressed_key == NO_PRESSED_KEY:
-                continue
-
-            engine_event = self.__key_engine_event_mapping.get(pressed_key)
+            engine_event = self.__try_get_engine_event_by_input_key()
 
             if engine_event is None:
                 continue
