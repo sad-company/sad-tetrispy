@@ -18,6 +18,12 @@ class Engine:
         self.__stdscr = stdscr
         self.__tick_duration_in_sec = tick_duration_in_sec
         self.__event_handler = event_handler
+        # TODO(DP): cover all input keys
+        self.__key_engine_event_mapping: dict[int, EngineEvent] = {
+            curses.KEY_LEFT: EngineEvent.MOVE_LEFT,
+            curses.KEY_RIGHT: EngineEvent.MOVE_RIGHT,
+            curses.KEY_DOWN: EngineEvent.TIME_TICK,
+        }
 
     def __init_screen(self) -> None:
         # NOTE: do not wait for input when calling getch
@@ -47,11 +53,9 @@ class Engine:
             if pressed_key == NO_PRESSED_KEY:
                 continue
 
-            # TODO(DP): cover all input keys
-            # TODO(DP): key mapping support (extract map)
-            if pressed_key == curses.KEY_LEFT:
-                self.__event_handler.handle(EngineEvent.MOVE_LEFT)
-            elif pressed_key == curses.KEY_RIGHT:
-                self.__event_handler.handle(EngineEvent.MOVE_RIGHT)
-            elif pressed_key == curses.KEY_DOWN:
-                self.__event_handler.handle(EngineEvent.TIME_TICK)
+            engine_event = self.__key_engine_event_mapping.get(pressed_key)
+
+            if engine_event is None:
+                continue
+
+            self.__event_handler.handle(engine_event)
