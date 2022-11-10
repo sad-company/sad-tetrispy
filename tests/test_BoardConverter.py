@@ -47,6 +47,6 @@ class BoardConverterTestCase(unittest.TestCase):
                     '0 0 0 0 0\n'
 
         board_from_str = BoardConverter.from_string(board_srt)
-        board_from_str = BoardConverter.to_string(board_from_str)
+        str_from_board = BoardConverter.to_string(board_from_str)
 
-        self.assertEqual(board_srt, board_from_str)
+        self.assertEqual(board_srt, str_from_board)
