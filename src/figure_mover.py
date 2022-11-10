@@ -65,28 +65,22 @@ class FigureMover:
         return new_points, new_rotation
 
     @staticmethod
-    def move_right(figure: Figure) -> NewPoints:
+    def __move(figure: Figure, move_point: Point) -> NewPoints:
         new_points: NewPoints = []
 
         for point in figure.points:
-            new_points.append(Point(point.x, point.y + 1))
+            new_points.append(Point(point.x + move_point.x, point.y + move_point.y))
 
         return new_points
+
+    @staticmethod
+    def move_right(figure: Figure) -> NewPoints:
+        return FigureMover.__move(figure, Point(0, 1))
 
     @staticmethod
     def move_left(figure: Figure) -> NewPoints:
-        new_points: NewPoints = []
-
-        for point in figure.points:
-            new_points.append(Point(point.x, point.y - 1))
-
-        return new_points
+        return FigureMover.__move(figure, Point(0, -1))
 
     @staticmethod
     def move_down(figure: Figure) -> NewPoints:
-        new_points: NewPoints = []
-
-        for point in figure.points:
-            new_points.append(Point(point.x + 1, point.y))
-
-        return new_points
+        return FigureMover.__move(figure, Point(1, 0))
