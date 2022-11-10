@@ -21,5 +21,5 @@ class BoardConverterTestCase(unittest.TestCase):
         self.assertEqual(expected, BoardConverter.to_string(board))
 
     def test_convert_from_string_when_correct_cells_line(self):
-        # TODO(AB): Task for Serg
+        # TODO(AB): Task for Onehayzent
         pass
