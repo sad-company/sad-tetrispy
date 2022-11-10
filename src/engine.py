@@ -3,6 +3,7 @@ from time import time
 
 from base_engine_event_handler import BaseEngineEventHandler
 from engine_event import EngineEvent
+from game_event import GameEvent
 
 NO_PRESSED_KEY = -1
 
@@ -51,6 +52,19 @@ class Engine:
 
         return self.__key_engine_event_mapping.get(pressed_key)
 
+    def __get_engine_events(self) -> list[EngineEvent]:
+        result = []
+
+        if self.__is_tick_time():
+            result.append(EngineEvent.TIME_TICK)
+
+        engine_event = self.__try_get_engine_event_by_input_key()
+
+        if engine_event is not None:
+            result.append(engine_event)
+
+        return result
+
     def run(self) -> None:
         self.__init_screen()
         self.__event_handler.handle(EngineEvent.START)
@@ -58,12 +72,8 @@ class Engine:
         # TODO(DP): handle self.__event_handler.handle_engine_event() results
         # TODO(DP): handle GameEvent.END to stop
         while True:
-            if self.__is_tick_time():
-                self.__event_handler.handle(EngineEvent.TIME_TICK)
+            for engine_event in self.__get_engine_events():
+                game_event = self.__event_handler.handle(engine_event)
 
-            engine_event = self.__try_get_engine_event_by_input_key()
-
-            if engine_event is None:
-                continue
-
-            self.__event_handler.handle(engine_event)
+                if game_event == GameEvent.END:
+                    break
