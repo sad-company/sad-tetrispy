@@ -9,14 +9,14 @@ class RotationKind(Enum):
 
     def get_next(self) -> 'RotationKind':
         value = self.value + 1
-        if value > 4:
+        if value > RotationKind.ROTATION_270.value:
             return RotationKind.ROTATION_0
 
         return RotationKind(value)
 
     def get_prev(self) -> 'RotationKind':
         value = self.value - 1
-        if value == 0:
+        if value < RotationKind.ROTATION_0.value:
             return RotationKind.ROTATION_270
 
         return RotationKind(value)
