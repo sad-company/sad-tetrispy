@@ -12,7 +12,7 @@ RotationResult = Tuple[NewPoints, NewRotation]
 
 
 class FigureMover:
-    __rotation_figure_points_mapping: dict[FigureKind, dict[RotationKind, Points]] = {
+    __kind_rotation_points_mapping: dict[FigureKind, dict[RotationKind, Points]] = {
         FigureKind.SQUARE:
             {
                 RotationKind.ROTATION_0: [Point(0, 0), Point(0, 1), Point(1, 0), Point(1, 1)],
@@ -66,7 +66,7 @@ class FigureMover:
 
     @staticmethod
     def get_points_after_rotation(kind: FigureKind, rotation: RotationKind) -> NewPoints:
-        return copy.deepcopy(FigureMover.__rotation_figure_points_mapping[kind][rotation])
+        return copy.deepcopy(FigureMover.__kind_rotation_points_mapping[kind][rotation])
 
     @staticmethod
     def rotate(figure: Figure) -> RotationResult:
