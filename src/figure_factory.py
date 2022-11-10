@@ -1,5 +1,3 @@
-import copy
-
 from figure import Figure
 from figure_kind import FigureKind
 from figure_mover import FigureMover
@@ -11,7 +9,6 @@ class FigureFactory:
     @staticmethod
     def create(kind: FigureKind) -> Figure:
         start_rotation = RotationKind.ROTATION_0
-        figure_points = copy.deepcopy(
-            FigureMover.rotation_figure_points_mapping[start_rotation][kind])
+        figure_points = FigureMover.get_points_after_rotation(kind, start_rotation)
 
         return Figure(kind, Point(0, 0), figure_points, start_rotation)
