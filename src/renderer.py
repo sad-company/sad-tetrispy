@@ -58,7 +58,7 @@ class Renderer:
         x = self.__NEXT_FIGURE_TOP_PADDING
         y = self.__get_y_outside_board(board)
 
-        self.__draw_string(x, y, 'Next figure:')
+        self.__draw_string(x, y, 'Next:')
         x += 1
 
         next_figure_points = [
