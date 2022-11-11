@@ -8,7 +8,7 @@ from score_holder import ScoreHolder
 
 class Renderer:
     __BORDER_WEIGHT: int = 1
-    __FIGURE_TOP_PADDING: int = 1
+    __NEXT_FIGURE_TOP_PADDING: int = 1
     __STATISTIC_TOP_PADDING: int = 7
     __STATISTIC_BLOCKS_PADDING: int = 2
     __CELL_CHARACTER: dict[bool, str] = {
@@ -51,12 +51,12 @@ class Renderer:
         for point in figure_points:
             self.__draw_cell(point.x, point.y, is_fill=True)
 
-    def __get_right_board_point(self, board: Board) -> int:
+    def __get_y_outside_board(self, board: Board) -> int:
         return board.weight + self.__BORDER_WEIGHT + 1
 
     def __draw_next_figure(self, board: Board, figure: Figure) -> None:
-        x = self.__FIGURE_TOP_PADDING
-        y = self.__get_right_board_point(board)
+        x = self.__NEXT_FIGURE_TOP_PADDING
+        y = self.__get_y_outside_board(board)
 
         self.__draw_string(x, y, 'Next figure:')
         x += 1
@@ -68,7 +68,7 @@ class Renderer:
 
     def __draw_statistic(self, board: Board, score_holder: ScoreHolder) -> None:
         x = self.__STATISTIC_TOP_PADDING
-        y = self.__get_right_board_point(board)
+        y = self.__get_y_outside_board(board)
 
         self.__draw_string(x, y, 'Scores:')
         x += 1
