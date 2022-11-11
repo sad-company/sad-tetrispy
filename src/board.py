@@ -1,6 +1,6 @@
 from cells_type import CellsType
-from point import Point, Points
 from figure import Figure
+from point import Point, Points
 
 
 class Board:
@@ -14,6 +14,17 @@ class Board:
 
         self.__cells: CellsType = \
             [[False for _ in range(0, self.weight)] for _ in range(0, self.height)]
+
+    def __get_indexes_for_remove(self) -> list[int]:
+        result = []
+
+        for index, line in enumerate(self.__cells):
+            if False in line:
+                continue
+
+            result.append(index)
+
+        return result
 
     def is_cell_empty(self, point: Point) -> bool:
         # NOTE: x - height, y - weight
@@ -49,3 +60,23 @@ class Board:
                 return True
 
         return False
+
+    def remove_lines_if_needed(self) -> int:
+        """
+        Line should be removed if all line cells are True (are filled)
+
+        :return - count of removed lines if any
+        """
+
+        indexes_for_remove = self.__get_indexes_for_remove()
+
+        # NOTE: Remove from bottom to top
+        for index in reversed(indexes_for_remove):
+            del self.__cells[index]
+
+        removed_lines = len(indexes_for_remove)
+        empty_line = [[False] * self.weight]
+
+        self.__cells = empty_line * removed_lines + self.__cells
+
+        return removed_lines
