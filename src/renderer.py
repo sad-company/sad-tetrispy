@@ -1,12 +1,15 @@
 import curses.textpad
 
 from board import Board
+from figure import Figure
+from point import Point
 from score_holder import ScoreHolder
 
 
 class Renderer:
     __BORDER_WEIGHT: int = 1
-    __STATISTIC_TOP_PADDING: int = 1
+    __FIGURE_TOP_PADDING: int = 1
+    __STATISTIC_TOP_PADDING: int = 7
     __STATISTIC_BLOCKS_PADDING: int = 2
     __CELL_CHARACTER: dict[bool, str] = {
         True: '▨',
@@ -44,13 +47,28 @@ class Renderer:
                 self.__draw_cell(x, y, is_cell_fill)
 
     # TODO(DP): use Figure class instead of figure_points
-    def __draw_figure(self, figure_points: list) -> None:
+    def __draw_figure(self, figure_points: list[Point]) -> None:
         for point in figure_points:
             self.__draw_cell(point.x, point.y, is_fill=True)
 
+    def __get_right_board_point(self, board: Board) -> int:
+        return board.weight + self.__BORDER_WEIGHT + 1
+
+    def __draw_next_figure(self, board: Board, figure: Figure) -> None:
+        x = self.__FIGURE_TOP_PADDING
+        y = self.__get_right_board_point(board)
+
+        self.__draw_string(x, y, 'Next figure:')
+        x += 1
+
+        next_figure_points = [
+            Point(point.x + x, point.y + y) for point in figure.points]
+
+        self.__draw_figure(next_figure_points)
+
     def __draw_statistic(self, board: Board, score_holder: ScoreHolder) -> None:
         x = self.__STATISTIC_TOP_PADDING
-        y = board.weight + self.__BORDER_WEIGHT + 1
+        y = self.__get_right_board_point(board)
 
         self.__draw_string(x, y, 'Scores:')
         x += 1
@@ -64,9 +82,11 @@ class Renderer:
         self.__draw_string(x, y, str(score_holder.get_burned_line_count()))
 
     # TODO(DP): use Figure class instead of figure_points
-    def render(self, board: Board, figure_points: list, score_holder: ScoreHolder) -> None:
+    def render(self, board: Board, figure_points: list[Point],
+               next_figure: Figure, score_holder: ScoreHolder) -> None:
         self.__before_render()
         self.__draw_board_border(board)
+        self.__draw_next_figure(board, next_figure)
         self.__draw_statistic(board, score_holder)
         self.__draw_board_cells(board)
         self.__draw_figure(figure_points)
