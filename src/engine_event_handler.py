@@ -47,6 +47,7 @@ class EngineEventHandler(BaseEngineEventHandler):
         # TODO(DP): <-- replace after with FigureMover
         self.__renderer.render(self._board,
                                current_figure_points,
+                               self.__next_figure,
                                self.__score_holder)
 
         return GameEvent.CONTINUE
