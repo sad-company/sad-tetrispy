@@ -8,6 +8,8 @@ from rotation_kind import RotationKind
 
 NewPoints = Points
 NewRotation = RotationKind
+NewPosition = Point
+MoveResult = Tuple[NewPoints, NewPosition]
 RotationResult = Tuple[NewPoints, NewRotation]
 
 
@@ -77,18 +79,21 @@ class FigureMover:
         return new_points, new_rotation
 
     @staticmethod
-    def __move(figure: Figure, move_point: Point) -> NewPoints:
-        # TODO(DP): Points + operation Point
-        return [point + move_point for point in figure.get_points()]
+    def __move(figure: Figure, move_point: Point) -> MoveResult:
+        # TODO(AB): Points + operation Point
+        new_points = [point + move_point for point in figure.get_points()]
+        new_position = figure.position + move_point
+
+        return new_points, new_position
 
     @staticmethod
-    def move_right(figure: Figure) -> NewPoints:
+    def move_right(figure: Figure) -> MoveResult:
         return FigureMover.__move(figure, Point(0, 1))
 
     @staticmethod
-    def move_left(figure: Figure) -> NewPoints:
+    def move_left(figure: Figure) -> MoveResult:
         return FigureMover.__move(figure, Point(0, -1))
 
     @staticmethod
-    def move_down(figure: Figure) -> NewPoints:
+    def move_down(figure: Figure) -> MoveResult:
         return FigureMover.__move(figure, Point(1, 0))

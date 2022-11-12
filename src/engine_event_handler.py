@@ -4,7 +4,6 @@ from engine_event import EngineEvent
 from figure_factory import FigureFactory
 from figure_mover import FigureMover
 from game_event import GameEvent
-from point import Point
 from renderer import Renderer
 from score_holder import ScoreHolder
 
@@ -29,10 +28,10 @@ class EngineEventHandler(BaseEngineEventHandler):
             return GameEvent.END
 
         if event == EngineEvent.TIME_TICK:
-            new_points = FigureMover.move_down(self.__current_figure)
+            new_points, new_position = FigureMover.move_down(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position += Point(1, 0)
+                self.__current_figure.position = new_position
             else:
                 self._board.set_cells_with_value(self.__current_figure.get_points(), True)
 
@@ -44,16 +43,16 @@ class EngineEventHandler(BaseEngineEventHandler):
                 self.__use_next_figure()
 
         if event == EngineEvent.MOVE_RIGHT:
-            new_points = FigureMover.move_right(self.__current_figure)
+            new_points, new_position = FigureMover.move_right(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position += Point(0, 1)
+                self.__current_figure.position = new_position
 
         if event == EngineEvent.MOVE_LEFT:
-            new_points = FigureMover.move_left(self.__current_figure)
+            new_points, new_position = FigureMover.move_left(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position += Point(0, -1)
+                self.__current_figure.position = new_position
 
         if event == EngineEvent.ROTATE_CLOCKWISE:
             new_points, new_rotation = FigureMover.rotate(self.__current_figure)
