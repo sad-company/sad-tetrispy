@@ -11,3 +11,7 @@ class Figure:
     position: Point
     points: Points
     rotation: RotationKind
+
+    def get_points(self) -> Points:
+        # TODO(DP): Points + operation Point
+        return [point + self.position for point in self.points]
