@@ -21,10 +21,11 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__current_figure = self.__next_figure
         self.__next_figure = FigureFactory.create_random()
 
-    def handle(self, event: EngineEvent) -> GameEvent:
-        current_figure_points = self.__current_figure.points
+    def __is_game_end(self) -> bool:
+        return not self._board.is_cells_empty(self.__current_figure.points)
 
-        if not self._board.is_cells_empty(current_figure_points):
+    def handle(self, event: EngineEvent) -> GameEvent:
+        if self.__is_game_end():
             return GameEvent.END
 
         if event == EngineEvent.TIME_TICK:
