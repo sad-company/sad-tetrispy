@@ -32,8 +32,7 @@ class EngineEventHandler(BaseEngineEventHandler):
             new_points = FigureMover.move_down(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position = Point(self.__current_figure.position.x + 1,
-                                                       self.__current_figure.position.y)
+                self.__current_figure.position += Point(1, 0)
             else:
                 self._board.set_cells_with_value(self.__current_figure.get_points(), True)
 
@@ -48,15 +47,13 @@ class EngineEventHandler(BaseEngineEventHandler):
             new_points = FigureMover.move_right(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position = Point(self.__current_figure.position.x,
-                                                       self.__current_figure.position.y + 1)
+                self.__current_figure.position += Point(0, 1)
 
         if event == EngineEvent.MOVE_LEFT:
             new_points = FigureMover.move_left(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
-                self.__current_figure.position = Point(self.__current_figure.position.x,
-                                                       self.__current_figure.position.y - 1)
+                self.__current_figure.position += Point(0, -1)
 
         if event == EngineEvent.ROTATE_CLOCKWISE:
             new_points, new_rotation = FigureMover.rotate(self.__current_figure)
