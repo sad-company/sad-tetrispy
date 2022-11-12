@@ -80,7 +80,7 @@ class FigureMover:
     def __move(figure: Figure, move_point: Point) -> NewPoints:
         new_points: NewPoints = []
 
-        for point in figure.points:
+        for point in figure.get_points():
             new_points.append(Point(point.x + move_point.x, point.y + move_point.y))
 
         return new_points
