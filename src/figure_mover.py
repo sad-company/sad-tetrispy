@@ -80,8 +80,7 @@ class FigureMover:
 
     @staticmethod
     def __move(figure: Figure, move_point: Point) -> MoveResult:
-        # TODO(AB): Points + operation Point
-        new_points = [point + move_point for point in figure.get_points()]
+        new_points = move_point.add_to(figure.get_points())
         new_position = figure.position + move_point
 
         return new_points, new_position

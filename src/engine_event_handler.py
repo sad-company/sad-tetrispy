@@ -56,8 +56,7 @@ class EngineEventHandler(BaseEngineEventHandler):
 
         if event == EngineEvent.ROTATE_CLOCKWISE:
             new_points, new_rotation = FigureMover.rotate(self.__current_figure)
-            # # TODO(DP): Points + operation Point
-            points_for_check = [point + self.__current_figure.position for point in new_points]
+            points_for_check = self.__current_figure.position.add_to(new_points)
 
             if self._board.is_cells_empty(points_for_check):
                 self.__current_figure.points = new_points
