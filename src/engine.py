@@ -74,4 +74,4 @@ class Engine:
                 game_event = self.__event_handler.handle(engine_event)
 
                 if game_event == GameEvent.END:
-                    break
+                    return
