@@ -46,7 +46,6 @@ class Renderer:
 
                 self.__draw_cell(x, y, is_cell_fill)
 
-    # TODO(DP): use Figure class instead of figure_points
     def __draw_figure(self, figure_points: list[Point]) -> None:
         for point in figure_points:
             self.__draw_cell(point.x, point.y, is_fill=True)
@@ -81,12 +80,11 @@ class Renderer:
 
         self.__draw_string(x, y, str(score_holder.get_burned_line_count()))
 
-    # TODO(DP): use Figure class instead of figure_points
-    def render(self, board: Board, figure_points: list[Point],
+    def render(self, board: Board, figure: Figure,
                next_figure: Figure, score_holder: ScoreHolder) -> None:
         self.__before_render()
         self.__draw_board_border(board)
         self.__draw_next_figure(board, next_figure)
         self.__draw_statistic(board, score_holder)
         self.__draw_board_cells(board)
-        self.__draw_figure(figure_points)
+        self.__draw_figure(figure.get_points())

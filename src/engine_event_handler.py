@@ -46,7 +46,7 @@ class EngineEventHandler(BaseEngineEventHandler):
                 cell.y -= 1
         # TODO(DP): <-- replace after with FigureMover
         self.__renderer.render(self._board,
-                               current_figure_points,
+                               self.__current_figure,
                                self.__next_figure,
                                self.__score_holder)
 
