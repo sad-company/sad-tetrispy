@@ -24,6 +24,8 @@ class Engine:
             curses.KEY_LEFT: EngineEvent.MOVE_LEFT,
             curses.KEY_RIGHT: EngineEvent.MOVE_RIGHT,
             curses.KEY_DOWN: EngineEvent.TIME_TICK,
+            curses.KEY_UP: EngineEvent.ROTATE_CLOCKWISE,
+            ord(' '): EngineEvent.ROTATE_CLOCKWISE,  # whitespace
         }
         self.__last_tick_timestamp = time()
 
