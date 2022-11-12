@@ -13,5 +13,4 @@ class Figure:
     rotation: RotationKind
 
     def get_points(self) -> Points:
-        # TODO(DP): Points + operation Point
-        return [point + self.position for point in self.points]
+        return self.position.add_to(self.points)
