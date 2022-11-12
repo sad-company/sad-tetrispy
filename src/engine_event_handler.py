@@ -43,19 +43,19 @@ class EngineEventHandler(BaseEngineEventHandler):
 
                 self.__use_next_figure()
 
-        if event == EngineEvent.MOVE_RIGHT:
+        elif event == EngineEvent.MOVE_RIGHT:
             new_points, new_position = FigureMover.move_right(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
                 self.__current_figure.position = new_position
 
-        if event == EngineEvent.MOVE_LEFT:
+        elif event == EngineEvent.MOVE_LEFT:
             new_points, new_position = FigureMover.move_left(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
                 self.__current_figure.position = new_position
 
-        if event == EngineEvent.ROTATE_CLOCKWISE:
+        elif event == EngineEvent.ROTATE_CLOCKWISE:
             new_points, new_rotation = FigureMover.rotate(self.__current_figure)
             points_for_check = self.__current_figure.position.add_to(new_points)
 
