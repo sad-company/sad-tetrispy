@@ -2,7 +2,9 @@ from base_engine_event_handler import BaseEngineEventHandler
 from board import Board
 from engine_event import EngineEvent
 from figure_factory import FigureFactory
+from figure_mover import FigureMover
 from game_event import GameEvent
+from point import Point
 from renderer import Renderer
 from score_holder import ScoreHolder
 
@@ -26,25 +28,45 @@ class EngineEventHandler(BaseEngineEventHandler):
         if not self._board.is_cells_empty(current_figure_points):
             return GameEvent.END
 
-        # TODO(DP): add "figure touches bottom" check
-
-        # TODO(DP): use __use_next_figure()
-
-        # TODO(DP): use self.__score_holder
-
-        # TODO(DP): --> replace after with FigureMover
         if event == EngineEvent.TIME_TICK:
-            for cell in current_figure_points:
-                cell.x += 1
+            new_points = FigureMover.move_down(self.__current_figure)
+
+            if self._board.is_cells_empty(new_points):
+                self.__current_figure.position = Point(self.__current_figure.position.x + 1,
+                                                       self.__current_figure.position.y)
+            else:
+                self._board.set_cells_with_value(self.__current_figure.get_points(), True)
+
+                removed_lines = self._board.remove_lines_if_needed()
+
+                if removed_lines > 0:
+                    self.__score_holder.increment(removed_lines)
+
+                self.__use_next_figure()
 
         if event == EngineEvent.MOVE_RIGHT:
-            for cell in current_figure_points:
-                cell.y += 1
+            new_points = FigureMover.move_right(self.__current_figure)
+
+            if self._board.is_cells_empty(new_points):
+                self.__current_figure.position = Point(self.__current_figure.position.x,
+                                                       self.__current_figure.position.y + 1)
 
         if event == EngineEvent.MOVE_LEFT:
-            for cell in current_figure_points:
-                cell.y -= 1
-        # TODO(DP): <-- replace after with FigureMover
+            new_points = FigureMover.move_left(self.__current_figure)
+
+            if self._board.is_cells_empty(new_points):
+                self.__current_figure.position = Point(self.__current_figure.position.x,
+                                                       self.__current_figure.position.y - 1)
+
+        if event == EngineEvent.ROTATE_CLOCKWISE:
+            new_points, new_rotation = FigureMover.rotate(self.__current_figure)
+            # # TODO(DP): Points + operation Point
+            points_for_check = [point + self.__current_figure.position for point in new_points]
+
+            if self._board.is_cells_empty(points_for_check):
+                self.__current_figure.points = new_points
+                self.__current_figure.rotation = new_rotation
+
         self.__renderer.render(self._board,
                                self.__current_figure,
                                self.__next_figure,
