@@ -30,11 +30,13 @@ class FigureMoverTestCase(unittest.TestCase):
         self.assertEqual(points, snake_figure.points)
 
         sub_tests_data = {
-            'Move right': (FigureMover.move_right, [Point(0, 1), Point(0, 2), Point(1, 2), Point(1, 3)]),
-            'Move left': (FigureMover.move_left, [Point(0, -1), Point(0, 0), Point(1, 0), Point(1, 1)]),
-            'Move down': (FigureMover.move_down, [Point(1, 0), Point(1, 1), Point(2, 1), Point(2, 2)]),
+            'Move right': (FigureMover.move_right, [Point(0, 1), Point(0, 2), Point(1, 2), Point(1, 3)], Point(0, 1)),
+            'Move left': (FigureMover.move_left, [Point(0, -1), Point(0, 0), Point(1, 0), Point(1, 1)], Point(0, -1)),
+            'Move down': (FigureMover.move_down, [Point(1, 0), Point(1, 1), Point(2, 1), Point(2, 2)], Point(1, 0)),
         }
 
-        for sub_test, (func, new_points) in sub_tests_data.items():
+        for sub_test, (func, expected_points, expected_position) in sub_tests_data.items():
             with self.subTest(name=sub_test):
-                self.assertEqual(func(snake_figure), new_points)
+                actual_points, actual_position = func(snake_figure)
+                self.assertEqual(actual_position, expected_position)
+                self.assertEqual(actual_points, expected_points)
