@@ -19,6 +19,10 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__is_paused = False
         self.__ticks_for_move_down = initial_ticks_for_move_down
         self.__tick_count = 0
+        self.__logs: list[str] = []
+
+    def __log_message(self, message: str) -> None:
+        self.__logs.append(message)
 
     def __use_next_figure(self) -> None:
         self.__current_figure = self.__next_figure
@@ -109,6 +113,7 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__renderer.render(self._board,
                                self.__current_figure,
                                self.__next_figure,
-                               self.__score_holder)
+                               self.__score_holder,
+                               self.__logs)
 
         return GameEvent.CONTINUE
