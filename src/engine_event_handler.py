@@ -22,7 +22,7 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__next_figure = FigureFactory.create_random(self._board.weight)
 
     def __is_game_end(self) -> bool:
-        return not self._board.is_cells_empty(self.__current_figure.points)
+        return not self._board.is_cells_empty(self.__current_figure.get_points())
 
     def handle(self, event: EngineEvent) -> GameEvent:
         if self.__is_game_end():
