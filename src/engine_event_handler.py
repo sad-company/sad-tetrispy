@@ -42,15 +42,17 @@ class EngineEventHandler(BaseEngineEventHandler):
 
         if self._board.is_cells_empty(new_points):
             self.__current_figure.position = new_position
-        else:
-            self._board.set_cells_with_value(self.__current_figure.get_points(), True)
 
-            removed_lines = self._board.remove_lines_if_needed()
+            return
 
-            if removed_lines > 0:
-                self.__score_holder.increment(removed_lines)
+        self._board.set_cells_with_value(self.__current_figure.get_points(), True)
 
-                self.__use_next_figure()
+        removed_lines = self._board.remove_lines_if_needed()
+
+        if removed_lines > 0:
+            self.__score_holder.increment(removed_lines)
+
+        self.__use_next_figure()
 
     def __handle_figure_rotate(self) -> None:
         new_points, new_rotation = FigureMover.rotate(self.__current_figure)
