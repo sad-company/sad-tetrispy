@@ -16,6 +16,7 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__score_holder = ScoreHolder()
         self.__current_figure = FigureFactory.create_random(self._board.weight)
         self.__next_figure = FigureFactory.create_random(self._board.weight)
+        self.__is_paused = False
 
     def __use_next_figure(self) -> None:
         self.__current_figure = self.__next_figure
@@ -28,7 +29,13 @@ class EngineEventHandler(BaseEngineEventHandler):
         if self.__is_game_end():
             return GameEvent.END
 
-        if event == EngineEvent.TIME_TICK:
+        if event == EngineEvent.PAUSE:
+            self.__is_paused = not self.__is_paused
+
+        if self.__is_paused:
+            return GameEvent.CONTINUE
+
+        elif event == EngineEvent.TIME_TICK:
             new_points, new_position = FigureMover.move_down(self.__current_figure)
 
             if self._board.is_cells_empty(new_points):
