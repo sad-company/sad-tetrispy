@@ -9,7 +9,7 @@ from score_holder import ScoreHolder
 
 
 class EngineEventHandler(BaseEngineEventHandler):
-    def __init__(self, stdscr, board: Board) -> None:
+    def __init__(self, stdscr, board: Board, initial_ticks_for_move_down: int) -> None:
         super().__init__(stdscr, board)
 
         self.__renderer = Renderer(stdscr)
@@ -17,6 +17,8 @@ class EngineEventHandler(BaseEngineEventHandler):
         self.__current_figure = FigureFactory.create_random(self._board.weight)
         self.__next_figure = FigureFactory.create_random(self._board.weight)
         self.__is_paused = False
+        self.__ticks_for_move_down = initial_ticks_for_move_down
+        self.__tick_count = 0
 
     def __use_next_figure(self) -> None:
         self.__current_figure = self.__next_figure
@@ -24,6 +26,18 @@ class EngineEventHandler(BaseEngineEventHandler):
 
     def __is_game_end(self) -> bool:
         return not self._board.is_cells_empty(self.__current_figure.get_points())
+
+    def __is_needed_to_move_figure_down(self) -> bool:
+        if self.__tick_count < self.__ticks_for_move_down:
+            return False
+
+        self.__tick_count = 0
+
+        return True
+
+    def __decrease_ticks_for_move_down(self, removed_lines: int) -> None:
+        self.__ticks_for_move_down -= removed_lines
+        self.__ticks_for_move_down = max(self.__ticks_for_move_down, 1)
 
     def __handle_figure_move_right(self) -> None:
         new_points, new_position = FigureMover.move_right(self.__current_figure)
@@ -50,6 +64,8 @@ class EngineEventHandler(BaseEngineEventHandler):
         removed_lines = self._board.remove_lines_if_needed()
 
         if removed_lines > 0:
+            self.__decrease_ticks_for_move_down(removed_lines)
+
             self.__score_holder.increment(removed_lines)
 
         self.__use_next_figure()
@@ -73,6 +89,12 @@ class EngineEventHandler(BaseEngineEventHandler):
             return GameEvent.CONTINUE
 
         if event == EngineEvent.TIME_TICK:
+            self.__tick_count += 1
+
+            if self.__is_needed_to_move_figure_down():
+                self.__handle_figure_move_down()
+
+        elif event == EngineEvent.MOVE_DOWN:
             self.__handle_figure_move_down()
 
         elif event == EngineEvent.MOVE_RIGHT:
