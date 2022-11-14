@@ -14,12 +14,12 @@ class EngineEventHandler(BaseEngineEventHandler):
 
         self.__renderer = Renderer(stdscr)
         self.__score_holder = ScoreHolder()
-        self.__current_figure = FigureFactory.create_random()
-        self.__next_figure = FigureFactory.create_random()
+        self.__current_figure = FigureFactory.create_random(self._board.weight)
+        self.__next_figure = FigureFactory.create_random(self._board.weight)
 
     def __use_next_figure(self) -> None:
         self.__current_figure = self.__next_figure
-        self.__next_figure = FigureFactory.create_random()
+        self.__next_figure = FigureFactory.create_random(self._board.weight)
 
     def __is_game_end(self) -> bool:
         return not self._board.is_cells_empty(self.__current_figure.points)
