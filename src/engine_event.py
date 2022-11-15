@@ -8,6 +8,7 @@ class EngineEvent(Enum):
     # Interaction
     MOVE_LEFT = auto()
     MOVE_RIGHT = auto()
+    MOVE_DOWN = auto()
     ROTATE_CLOCKWISE = auto()
     # State
     PAUSE = auto()

@@ -15,7 +15,7 @@ class Engine:
     def __init__(self,
                  stdscr,  # for terminal window interactions
                  event_handler: BaseEngineEventHandler,
-                 tick_duration_in_sec: int) -> None:
+                 tick_duration_in_sec: float) -> None:
         self.__stdscr = stdscr
         self.__tick_duration_in_sec = tick_duration_in_sec
         self.__event_handler = event_handler
@@ -23,7 +23,7 @@ class Engine:
         self.__key_engine_event_mapping: dict[int, EngineEvent] = {
             curses.KEY_LEFT: EngineEvent.MOVE_LEFT,
             curses.KEY_RIGHT: EngineEvent.MOVE_RIGHT,
-            curses.KEY_DOWN: EngineEvent.TIME_TICK,
+            curses.KEY_DOWN: EngineEvent.MOVE_DOWN,
             curses.KEY_UP: EngineEvent.ROTATE_CLOCKWISE,
             ord(' '): EngineEvent.ROTATE_CLOCKWISE,  # whitespace
             curses.KEY_BACKSPACE: EngineEvent.PAUSE,

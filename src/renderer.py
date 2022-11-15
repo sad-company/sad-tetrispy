@@ -80,11 +80,24 @@ class Renderer:
 
         self.__draw_string(x, y, str(score_holder.get_burned_line_count()))
 
+    def __show_logs(self, log_lines: list[str]) -> None:
+        y = 0
+        x = 25
+
+        self.__draw_string(y, x, 'Logs:')
+
+        for i, log_line in enumerate(log_lines[-20:]):
+            self.__draw_string(y + i + 1, 25, log_line)
+
     def render(self, board: Board, figure: Figure,
-               next_figure: Figure, score_holder: ScoreHolder) -> None:
+               next_figure: Figure, score_holder: ScoreHolder,
+               log_lines: list[str]) -> None:
         self.__before_render()
         self.__draw_board_border(board)
         self.__draw_next_figure(board, next_figure)
         self.__draw_statistic(board, score_holder)
         self.__draw_board_cells(board)
         self.__draw_figure(figure.get_points())
+
+        if len(log_lines) > 0:
+            self.__show_logs(log_lines)
