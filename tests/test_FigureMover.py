@@ -9,7 +9,8 @@ from rotation_kind import RotationKind
 
 class FigureMoverTestCase(unittest.TestCase):
     def test_when_rotate_figure(self):
-        line_figure = FigureFactory.create(FigureKind.LINE)
+        # NOTE: Set board_weight=2 to have figure at 0 position (not in the board center)
+        line_figure = FigureFactory.create(FigureKind.LINE, 2)
         points = [Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)]
 
         self.assertEqual(RotationKind.ROTATION_0, line_figure.rotation)
@@ -24,7 +25,7 @@ class FigureMoverTestCase(unittest.TestCase):
         self.assertEqual(expected_rotation, actual_rotation)
 
     def test_when_move_figure(self):
-        snake_figure = FigureFactory.create(FigureKind.SNAKE_LEFT)
+        snake_figure = FigureFactory.create(FigureKind.SNAKE_LEFT, 2)
         points = [Point(0, 0), Point(0, 1), Point(1, 1), Point(1, 2)]
 
         self.assertEqual(points, snake_figure.points)
