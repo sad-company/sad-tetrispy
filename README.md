@@ -13,7 +13,7 @@ Add gif ro README
 python3 src/main.py
 ```
 
-![sad-tetrispy-moving](https://github.com/sad-company/sad-tetrispy/tree/main/doc/gif/move.gif)
+![sad-tetrispy-moving](https://github.com/sad-company/sad-tetrispy/blob/main/doc/gif/move.gif)
 
 ### Run unittests
 
