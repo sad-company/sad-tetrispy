@@ -8,7 +8,7 @@ from point import Point
 
 class BoardTestCase(unittest.TestCase):
     def test_when_figure_is_not_on_bottom(self):
-        line_figure = FigureFactory.create(FigureKind.LINE)
+        line_figure = FigureFactory.create(FigureKind.LINE, 4)
 
         board_with_empty_cells = Board(4, 4)
         # NOTE: x - figure cell; o - filled cell
@@ -38,7 +38,7 @@ class BoardTestCase(unittest.TestCase):
                 self.assertFalse(board.is_on_bottom(figure))
 
     def test_when_figure_is_on_bottom(self):
-        snake_figure = FigureFactory.create(FigureKind.SNAKE_LEFT)
+        snake_figure = FigureFactory.create(FigureKind.SNAKE_LEFT, 4)
 
         board_with_empty_cells = Board(2, 4)
         # xx--
