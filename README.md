@@ -4,8 +4,6 @@ Tetris in your Terminal
 
 ### Run game
 
-Add gif ro README
-
 1. Choose `Noto Color Emoji` font in your Terminal profile (or create new)
 2. Run command
 
